@@ -1,0 +1,245 @@
+-- 卡密系统
+local correctKey = "ayu"
+local isVerified = false
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "KeySystem"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BorderSizePixel = 0
+
+local title = Instance.new("TextLabel", frame)
+title.Text = "请输入卡密"
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 24
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(255,255,255)
+
+local input = Instance.new("TextBox", frame)
+input.PlaceholderText = "输入卡密..."
+input.Size = UDim2.new(0.8, 0, 0, 35)
+input.Position = UDim2.new(0.1, 0, 0.45, 0)
+input.Text = ""
+input.Font = Enum.Font.SourceSans
+input.TextSize = 20
+input.TextColor3 = Color3.fromRGB(0,0,0)
+input.BackgroundColor3 = Color3.fromRGB(255,255,255)
+input.BorderSizePixel = 0
+
+local tips = Instance.new("TextLabel", frame)
+tips.Text = ""
+tips.Font = Enum.Font.SourceSansItalic
+tips.TextSize = 18
+tips.Size = UDim2.new(1, 0, 0, 20)
+tips.Position = UDim2.new(0, 0, 0.8, 0)
+tips.BackgroundTransparency = 1
+tips.TextColor3 = Color3.fromRGB(255, 50, 50)
+
+local enter = Instance.new("TextButton", frame)
+enter.Text = "验证"
+enter.Size = UDim2.new(0.8, 0, 0, 35)
+enter.Position = UDim2.new(0.1, 0, 0.7, 0)
+enter.Font = Enum.Font.SourceSansBold
+enter.TextSize = 20
+enter.TextColor3 = Color3.fromRGB(255,255,255)
+enter.BackgroundColor3 = Color3.fromRGB(60, 180, 75)
+enter.BorderSizePixel = 0
+
+enter.MouseButton1Click:Connect(function()
+    if input.Text == correctKey then
+        tips.Text = "验证成功！"
+        isVerified = true
+        wait(1)
+        gui:Destroy()
+    else
+        tips.Text = "卡密错误！"
+        wait(1)
+        tips.Text = ""
+    end
+end)
+
+-- 阻止未验证前执行主功能
+while not isVerified do
+    wait(0.1)
+end
+
+-- ↓↓↓ 验证通过后，主UI及功能按钮注册 ↓↓↓
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "(啊鱼脚本中心)",
+    Icon = "rbxassetid://106566300216007",
+    IconThemed = true,
+    Author = "(谢谢支持)",
+    Folder = "CloudHub",
+    Size = UDim2.fromOffset(480, 380),
+    Transparent = true,
+    Theme = "Dark",
+    User = {
+        Enabled = true,
+        Callback = function() end,
+        Anonymous = true
+    },
+    SideBarWidth = 200,
+    ScrollBarEnabled = true,
+})
+
+local Tab = Window:Tab({
+    Title = "功能",
+    Icon = "house",
+    Locked = false,
+})
+
+local function safeButton(title, code)
+    Tab:Button({
+        Title = title,
+        Callback = function()
+            local ok, err = pcall(code)
+            if not ok then
+                WindUI:Notify({
+                    Title = "加载失败",
+                    Description = tostring(err),
+                    Duration = 3
+                })
+            end
+        end
+    })
+end
+
+safeButton("恐鬼症付费版", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/longchneg/GAl/refs/heads/Dragon/%E5%8D%A1%E5%AF%86%E7%B3%BB%E7%BB%9F"))()
+end)
+
+safeButton("doors", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Rael-Hub/main/main.txt"))()
+end)
+
+safeButton("doors小云", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/EntitySpawner/main/doors(orionlib).lua"))()
+end)
+
+safeButton("自然灾害", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Codexxscripts/Script/refs/heads/main/Protected_7867058958573066.lua.txt"))()
+end)
+
+safeButton("海贼王", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NinoGod/NetnaYay/8d21ce23346c500c93bb8b4a71f7791e4058a70b/startload.lua"))()
+end)
+
+safeButton("忍者传奇", function()
+    -- README.md不是脚本文件，报错提示
+    WindUI:Notify({
+        Title = "加载失败",
+        Description = "该脚本为README.md，无法执行",
+        Duration = 3
+    })
+end)
+
+safeButton("殖民地生存", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/USA868/-/main/.github/workflows/Protected_9290504785528559.lua"))()
+end)
+
+safeButton("黑洞脚本", function()
+    loadstring(game:HttpGet("https://pastefy.app/pYhER1z4/raw"))()
+end)
+
+safeButton("最坚强的战场", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/tsbscripts/main/Main"))()
+end)
+
+safeButton("种植花园", function()
+    loadstring(game:HttpGet("https://pastefy.app/eUAzqoCL/raw"))()
+end)
+
+safeButton("WTB种植花园", function()
+    loadstring(game:HttpGet("https://pastefy.app/eUAzqoCL/raw"))()
+end)
+
+safeButton("躲避", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Iliankytb/Iliankytb/main/NewbestEvadeCheat"))()
+end)
+
+safeButton("偷走脑红", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Jake-Brock/Scripts/main/Fw%20SAB.lua"))()
+end)
+
+safeButton("被遗弃", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Actualmrp/FW-Forsaken-V2.0-Rep/refs/heads/main/FrostwareForsakenV2.0Source.txt"))()
+end)
+
+safeButton("摊位世界", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxScriptHub/MikeyHub-V2/main/Loader/Main"))()
+end)
+
+safeButton("死铁轨", function()
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e1cfd93b113a79773d93251b61af1e2f.lua"))()
+end)
+
+safeButton("避难所", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/refs/heads/main/AsyliumLife.lua"))()
+end)
+
+safeButton("巴掌脚本", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/refs/heads/main/Slap%20Battles/Slap%20Battles%20Hub%20OP%20V.%202.6.5"))()
+end)
+
+safeButton("fisch", function()
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/AverageHub/1980eccce4133d77fb24d166dc296125/raw/2d9c88acc21a302d92aed0e8b6f0dcd287c8b96b/gistfile1.txt"))()
+end)
+
+safeButton("森林中的99夜", function()
+    loadstring(game:HttpGet("https://get-arvotheon-ontop.netlify.app/Loader.lua"))()
+end)
+
+safeButton("力量传奇", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Majinbuu69420/Work/refs/heads/main/decoded%20ducks%20hub%20ml"))()
+end)
+
+safeButton("伐木大亨", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CloudX-ScriptsWane/ScriptsDache/main/%E4%BC%90%E6%9C%A8%E5%A4%A7%E4%BA%A822.lua"))()
+end)
+
+safeButton("压力", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/9kn-1/preeorrr/main/pressure.luau"))()
+end)
+
+safeButton("索纳里亚的世界", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Mangnex/Lunar-Hub/refs/heads/main/FreeLoader.lua"))()
+end)
+
+safeButton("蜂群", function()
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/calarriuszeus/efec4df5fee3d6aa9a183942d1310458/raw/f6a9ed333d1997b9e95a475da917ad7d9cb9485e/gistfile1.txt"))()
+end)
+
+safeButton("战争大亨", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/megamoeus/UI-Engine-V2/main/OWTPublic"))()
+end)
+
+safeButton("俄亥俄州", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/hkvHeHed"))()
+end)
+
+safeButton("越狱", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Pxsta72/ProjectAuto/main/free"))()
+end)
+
+safeButton("穷小子打工记", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/lyyanai/tianscript/main/穷小子打工记"))()
+end)
+
+safeButton("犯罪", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/main/loader.lua"))()
+end)
+
+safeButton("GB", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ChinaQY/Scripts/Main/GB"))()
+end)
+
+safeButton("墨水汉化", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/墨水游戏.lua"))()
+end)
